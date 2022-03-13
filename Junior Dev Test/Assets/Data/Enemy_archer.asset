@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120aaf31ef0b56045a4d6abfe72df8c6, type: 3}
   m_Name: Enemy_archer
   m_EditorClassIdentifier: 
-  speed: 0.5
+  maxLife: 100
+  speed: 5
   aggroRange: 2
-  attackRange: 1
+  attackDamage: 25
+  attackRange: 1.5
   attackSpeed: 1

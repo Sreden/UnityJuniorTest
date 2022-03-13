@@ -1,15 +1,32 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
     [SerializeField] protected EntityStats stats;
+    [SerializeField] protected Slider Healthbar;
+    
+    protected float actualLife;
     protected Vector3 TargetDirection;
     public bool isFocused = false;
     public bool hasAggro = false;
 
     protected GameObject TargetEntity = null;
+    
+    protected float ElapsedTimeBetweenAttacks;
+
+    protected void Start()
+    {
+        actualLife = stats.maxLife;
+    }
+
+    protected void Update()
+    {
+        Healthbar.value = actualLife / stats.maxLife;
+    }
 
     protected void UpdateAggro(float range, int layer)
     {
@@ -17,7 +34,9 @@ public class Entity : MonoBehaviour
         TargetDirection = Vector3.zero;
         hasAggro = false;
         // Check around
-        var hitColliders = Physics.OverlapSphere(this.transform.position, range, layer);
+        // 10 is a maximum number for research
+        var hitColliders = new Collider2D[10];
+        Physics2D.OverlapCircleNonAlloc(this.transform.position, range, hitColliders, layer);
         // locate enemy
         foreach (var enemy in hitColliders)
         {
@@ -40,13 +59,28 @@ public class Entity : MonoBehaviour
         if (direction.x >  transform.position.x) // To the right
         {
             localScale = new Vector3(1, localScale.y, localScale.z);
+            Healthbar.direction = Slider.Direction.LeftToRight;
         }
         else if (direction.x < transform.position.x) // To the left
         {
             localScale = new Vector3(-1, localScale.y, localScale.z);
+            Healthbar.direction = Slider.Direction.RightToLeft;
         }
         transform.localScale = localScale;
     }
+
+    public void Damage(float amount)
+    {
+        if ((actualLife -= amount) <= 0) Die();
+    }
+
+    private void Die()
+    {
+        // unfocus enemy
+        if (TargetEntity != null) TargetEntity.GetComponent<Entity>().isFocused = false;
+        Destroy(gameObject);
+    }
+    
     private void OnDrawGizmos()
     {
         // Draw a yellow sphere at the transform's position
