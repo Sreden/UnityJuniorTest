@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +13,28 @@ public class Game : MonoBehaviour
     public float goldDonationRate = 1f;
     public int donationAmount = 3;
     private float _elapsedTime;
+    
+    // Enemies
+    [SerializeField] private GameObject enemyPrefab;
+    public int loseCounter;
+    [SerializeField] private int loseAt = 10;
+    [SerializeField] private Checkpoint enemiesSpawn;
+
+
+    private void Start()
+    {
+        InvokeRepeating(nameof(Spawn), 5f, 1f);  //1s delay, repeat every 1s
+    }
 
     private void Update()
     {
         UpdateGolds();
         UpdateGoldsUi();
+        
+        if (loseCounter < loseAt) return;
+        
+        Time.timeScale = 0;
+        Debug.Log("LOSE");
     }
 
     private void UpdateGolds()
@@ -48,5 +67,11 @@ public class Game : MonoBehaviour
         golds = success ? golds - price : golds;
         
         return success;
+    }
+
+    public void Spawn()
+    {
+        var enemy = Instantiate(enemyPrefab, enemiesSpawn.transform);
+        enemy.GetComponent<Enemy>().targetCheckpoint = enemiesSpawn;
     }
 }
