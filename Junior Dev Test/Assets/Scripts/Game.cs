@@ -23,18 +23,30 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(Spawn), 5f, 1f);  //1s delay, repeat every 1s
+        InvokeRepeating(nameof(Spawn), 5f, 0.5f);  //1s delay, repeat every 1s
     }
 
     private void Update()
     {
         UpdateGolds();
         UpdateGoldsUi();
+
+        UpdateRenderOrder();
         
         if (loseCounter < loseAt) return;
         
         Time.timeScale = 0;
         Debug.Log("LOSE");
+    }
+
+    private static void UpdateRenderOrder()
+    {
+        var renderers = FindObjectsOfType<SpriteRenderer>();
+        foreach (var spriteRenderer in renderers)
+        {
+            if (spriteRenderer.gameObject.layer == 3 ) continue;
+            spriteRenderer.sortingOrder = (int) (spriteRenderer.transform.position.y * -100);
+        }
     }
 
     private void UpdateGolds()

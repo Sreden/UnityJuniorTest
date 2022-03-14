@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Ally : Entity
 {
-
-    private void Start()
+    public GameObject spawnTarget = null;
+    private new void Start()
     {
         base.Start();
+
+        // First attack is instant
+        ElapsedTimeBetweenAttacks = stats.attackSpeed;
     }
     
-    private void Update()
+    private new void Update()
     {
         base.Update();
         
@@ -31,7 +34,14 @@ public class Ally : Entity
         }
         else //Target is returning to tower spot
         {
+            if (spawnTarget == null) return;
             
+            TargetDirection = (spawnTarget.transform.position - transform.position).normalized;
+            Look(spawnTarget.transform.position);
+            if (Vector2.Distance(this.transform.position, spawnTarget.transform.position) > 0.1)
+            {
+                transform.position += TargetDirection * stats.speed * Time.deltaTime;
+            }
         }
     }
     

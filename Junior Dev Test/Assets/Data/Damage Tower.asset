@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 120aaf31ef0b56045a4d6abfe72df8c6, type: 3}
-  m_Name: Ally_archer
+  m_Script: {fileID: 11500000, guid: f231d4427861403488a58f37f7195ad7, type: 3}
+  m_Name: Damage Tower
   m_EditorClassIdentifier: 
-  maxLife: 100
-  speed: 0.5
-  aggroRange: 4
-  attackDamage: 20
-  attackRange: 3
-  attackSpeed: 0.5
+  buildTime: 2
+  cost: 100
+  spawnTime: 0
+  damage: 10
+  attackSpeed: 0.2
+  attackRange: 5

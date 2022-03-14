@@ -9,14 +9,14 @@ public class Enemy : Entity
     public Checkpoint targetCheckpoint;
     
     // Start is called before the first frame update
-    private void Start()
+    private new void Start()
     {
         base.Start();
         _gameLoop = GameObject.Find("Game").GetComponent<Game>();
     }
 
     // Update is called once per frame
-    private void Update()
+    private new void Update()
     {
         base.Update();
         

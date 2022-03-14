@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1338624515254772463, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: -1338624515254772463, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.62
+      objectReference: {fileID: 0}
     - target: {fileID: 349097554061702222, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -15,6 +23,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1266673555942729380, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.12
+      objectReference: {fileID: 0}
     - target: {fileID: 3962903015886794385, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
       propertyPath: m_Value
       value: 1
@@ -22,6 +34,10 @@ PrefabInstance:
     - target: {fileID: 7441066874042391265, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
       propertyPath: m_Maskable
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7582168078756255178, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7764997220756700984, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
       propertyPath: m_RootOrder
@@ -33,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7764997220756700984, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7764997220756700984, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
       propertyPath: m_LocalPosition.z
@@ -110,3 +126,4 @@ MonoBehaviour:
   Healthbar: {fileID: 8369411328713683698}
   isFocused: 0
   hasAggro: 0
+  spawnTarget: {fileID: 0}

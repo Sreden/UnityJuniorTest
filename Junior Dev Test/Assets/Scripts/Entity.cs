@@ -12,7 +12,6 @@ public class Entity : MonoBehaviour
     protected float actualLife;
     protected Vector3 TargetDirection;
     public bool isFocused = false;
-    public bool hasAggro = false;
 
     protected GameObject TargetEntity = null;
     
@@ -32,7 +31,6 @@ public class Entity : MonoBehaviour
     {
         if (TargetEntity != null) return;
         TargetDirection = Vector3.zero;
-        hasAggro = false;
         // Check around
         // 10 is a maximum number for research
         var hitColliders = new Collider2D[10];
@@ -48,7 +46,6 @@ public class Entity : MonoBehaviour
             TargetDirection = (entity.transform.position - transform.position).normalized;
             TargetEntity = enemy.gameObject;
             Look(TargetEntity.transform.position);
-            hasAggro = true;
             break;
         }
     }
@@ -68,7 +65,6 @@ public class Entity : MonoBehaviour
         }
         transform.localScale = localScale;
     }
-
     public void Damage(float amount)
     {
         if ((actualLife -= amount) <= 0) Die();

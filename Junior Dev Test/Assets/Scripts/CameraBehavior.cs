@@ -10,18 +10,19 @@ public class CameraBehavior : MonoBehaviour
     [SerializeField] private float maxX, zoomedMaxX;
     [SerializeField] private float maxY, zoomedMaxY;
     private float actualMaxX, actualMaxY;
-    
-    
+
+    private Game _game;
     private InputHandler _inputHandler;
     private float _zoom = 0;
     private float _fov;
-    
-    void Start()
+
+    private void Start()
     {
         // Init full zoomed out
         _fov = maxFOV;
         // init inputHandler
         _inputHandler = GameObject.Find("Player Controller").GetComponent<InputHandler>();
+        _game = GameObject.Find("Game").GetComponent<Game>();
     }
 
     void Update()
@@ -29,7 +30,7 @@ public class CameraBehavior : MonoBehaviour
         UpdateZoom();
         UpdateBoundaries();
         
-        if (_inputHandler.isScrollActive)
+        if (_inputHandler.isScrollActive && !_inputHandler.isBuilding)
         {
             transform.Translate(-_inputHandler.scroll * 0.015f);
         }
@@ -49,6 +50,9 @@ public class CameraBehavior : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, -actualMaxY, transform.position.z);
         }
+        
+        // If we want to make preview of tower + tower range we can check mouse position on Update
+        //CheckMouse();
     }
 
     /// <summary>
@@ -78,5 +82,27 @@ public class CameraBehavior : MonoBehaviour
         
         actualMaxX = Mathf.Lerp(zoomedMaxX, maxX, fovPercent);
         actualMaxY = Mathf.Lerp(zoomedMaxY, maxY, fovPercent);
+    }
+
+    private Vector3 CheckMouse()
+    {
+        var worldPosition = new Vector3();
+        if (!_inputHandler.isBuilding || Camera.main == null) return worldPosition;
+        
+        var mousePosition = _inputHandler.aim;
+        
+        worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, -Camera.main.transform.position.z));
+        return worldPosition;
+    }
+
+    public void Build()
+    {
+        if (!_inputHandler.isBuilding) return;
+        
+        var selectedTower = _inputHandler.selectedTower;
+        if (_game.Buy(selectedTower.GetComponent<Tower>().stats.cost))
+        {
+            Instantiate(_inputHandler.selectedTower, CheckMouse(), new Quaternion());
+        }
     }
 }
