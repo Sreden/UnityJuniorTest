@@ -6935,11 +6935,11 @@ MonoBehaviour:
   goldText: {fileID: 1556904276}
   golds: 0
   maxGolds: 1000
-  goldDonationRate: 0.4
+  goldDonationRate: 0.2
   donationAmount: 2
   enemyPrefab: {fileID: 7766638665709040590, guid: 3bb4556ede0f1834bbf70e6f79489203, type: 3}
   loseCounter: 0
-  loseAt: 10
+  loseAt: 50
   enemiesSpawn: {fileID: 2035836820}
 --- !u!4 &2005564678
 Transform:

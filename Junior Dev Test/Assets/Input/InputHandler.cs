@@ -49,7 +49,7 @@ namespace Input
             if (Camera.main != null) Camera.main.GetComponent<CameraBehavior>().Build();
         }
 
-        private void OnSelectDamageTower()
+        public void OnSelectDamageTower()
         {
             selectedTower = towers[0];
         }  

@@ -23,7 +23,7 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(Spawn), 5f, 0.5f);  //1s delay, repeat every 1s
+        InvokeRepeating(nameof(Spawn), 10f, 1f);  //10s delay, repeat every 1s
     }
 
     private void Update()
